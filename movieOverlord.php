@@ -111,27 +111,27 @@ textarea {
     $stmt = $pdo->prepare("SELECT titel, duur, omschrijving, uitkomstDatum, landVanAfkomst, trailer, id FROM netland.movies WHERE id=?");
     $stmt->execute([$_GET['id']]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
-    ?>
+?>
     <a href="http://localhost/films.php<?php echo "?id=$info[id]" ?>">Vorige pagina</a>
     <div class="hHoofd">
         <form method="post" class="hoofd">
-            <div class="sub"><b>Titel </b><input type="text" name="name" value="<?php echo $info['titel']?>"></div>
-            <div class="sub"><b>Lengte </b><input type="number" name="duur" value="<?php echo $info['duur']?>"></div>
-            <div class="sub"><b>Land van afkomst </b><input type="text" name="landVanAfkomst" value="<?php echo $info['landVanAfkomst']?>"></div>
-            <div class="sub"><b>Beschrijving </b><textarea type="text" name="beschrijving" rows="15" cols="40"> <?php echo $info['omschrijving']?> </textarea></div>
+            <div class="sub"><b>Titel </b><input required type="text" name="name" value="<?php echo $info['titel']?>"></div>
+            <div class="sub"><b>Lengte </b><input required type="number" name="duur" value="<?php echo $info['duur']?>"></div>
+            <div class="sub"><b>Land van afkomst </b><input required type="text" name="landVanAfkomst" value="<?php echo $info['landVanAfkomst']?>"></div>
+            <div class="sub"><b>Beschrijving </b><textarea required type="text" name="beschrijving" rows="15" cols="40"> <?php echo $info['omschrijving']?> </textarea></div>
             <div class="sub"><b>Uitkomst datum </b><input type="text" name="uitkomstDatum" value="<?php echo $info['uitkomstDatum']?>"></div>
             <div class="sub"><b>Trailer link </b><input type="text" name="trailer" value="<?php echo $info['trailer']?>"></div>
             <div class="subDif"><button type="sumbit">Veranderen</button</div>
         </form>
     </div>
 <?php
-if(isset($_POST["name"]) || isset($_POST["duur"]) || isset($_POST["beschrijving"]) || isset($_POST["landVanAfkomst"]) 
-    || isset($_POST["trailer"]) || isset($_POST["uitkomstDatum"])
-) {
-    $updateMovies = $pdo->prepare("UPDATE movies SET titel=?, omschrijving=?, landVanAfkomst=?, duur=?, uitkomstDatum=?, trailer=? WHERE id=?");
-    $updateMovies->execute([$_POST["name"], $_POST["beschrijving"], $_POST["landVanAfkomst"], $_POST["duur"], $_POST["uitkomstDatum"], $_POST["trailer"], $_GET["id"]]); 
-    header("Refresh:0");
-}
+    
+    if(isset($_POST["name"]) || isset($_POST["duur"]) || isset($_POST["beschrijving"]) || isset($_POST["landVanAfkomst"]) 
+    || isset($_POST["trailer"]) || isset($_POST["uitkomstDatum"])){
+        $updateMovies = $pdo->prepare("UPDATE movies SET titel=?, omschrijving=?, landVanAfkomst=?, duur=?, uitkomstDatum=?, trailer=? WHERE id=?");
+        $updateMovies->execute([$_POST["name"], $_POST["beschrijving"], $_POST["landVanAfkomst"], $_POST["duur"], $_POST["uitkomstDatum"], $_POST["trailer"], $_GET["id"]]); 
+        header("Refresh:0");
+    }
 ?>
 
 </body>

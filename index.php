@@ -135,7 +135,16 @@ $movieDuration .= $rememberSort;
             ?>
         </form>
     </table>
-
+    <form method=post>
+            <?php
+            if (isset($_POST['makeFilm'])){
+                $createFilm = $pdo->query('INSERT INTO movies (titel, duur, uitkomstDatum, landVanAfkomst, omschrijving, trailer) VALUES ("0", 0, "0", "0", "0", "0,")');
+                $createFilm->fetch();  
+                header("refresh:0");
+            } 
+            ?>
+        <button name="makeFilm">Record maken voor film</button>
+        </form>
     <table>
         <h2>Serie</h2>
         <form action="index.php" method="get">
@@ -181,7 +190,19 @@ $movieDuration .= $rememberSort;
             }   
             ?>
         </form>
+
+        
     </table>
+    <form method=post>
+            <?php
+            if (isset($_POST['makeSerie'])){
+                $createSerie = $pdo->query('INSERT INTO series (title, rating, description, has_won_awards, seasons, country, language) VALUES ("0", 0, "0", 0, 0, "0,", "0")');
+                $createSerie->fetch();  
+                header("refresh:0");
+            } 
+            ?>
+        <button name="makeSerie">Record maken voor serie</button>
+        </form>
 
     
 

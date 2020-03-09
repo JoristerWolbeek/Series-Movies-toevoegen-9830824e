@@ -61,7 +61,7 @@ a {
 
 $stmt = $pdo->prepare("SELECT titel, duur, landVanAfkomst, omschrijving, uitkomstDatum, trailer, id FROM netland.movies WHERE id=?");
 $stmt->execute([$_GET['id']]);
-while ($info = $stmt->fetch()) {
+while($info = $stmt->fetch()) {
     echo("<h1>".$info['titel']."</h1><br><b>".$info["duur"]." Minuten </b><br><b>Land van afkomst </b>".$info["landVanAfkomst"].
     "<br><br><b>Beschrijving </b><br>".$info["omschrijving"]."<br><br><b>Uitgekomen op </b>".$info["uitkomstDatum"]."<br><a href=http://localhost/movieOverlord.php?id=$info[id]>Edit</a>
     <br><iframe src='https://www.youtube.com/embed/$info[trailer]'</iframe>");
