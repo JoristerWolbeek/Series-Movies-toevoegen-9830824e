@@ -112,7 +112,7 @@ textarea {
     $stmt = $pdo->prepare("SELECT title, rating, description, seasons, country, language, has_won_awards, id FROM netland.series WHERE id=?");
     $stmt->execute([$_GET['id']]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
-?>
+    ?>
     <a href="http://localhost/series.php<?php echo "?id=$info[id]" ?>">Vorige pagina</a>
 
 
@@ -130,12 +130,13 @@ textarea {
     </div>
     
 <?php
-    if(isset($_POST["name"]) || isset($_POST["rating"]) || isset($_POST["beschrijving"]) || isset($_POST["landVanAfkomst"]) || isset($_POST["taal"]) || 
-    isset($_POST["prijzen"]) || isset($_POST["seizoenen"])){
-        $updateSeries = $pdo->prepare("UPDATE series SET title=?, description=?, country=?, language=?, has_won_awards=?, rating=?, seasons=? WHERE id=?");
-        $updateSeries->execute([$_POST["name"], $_POST["beschrijving"], $_POST["landVanAfkomst"], $_POST["taal"], $_POST["prijzen"], $_POST["rating"], $_POST["seizoenen"], $_GET["id"]]); 
-        header("Refresh:0");
-    }
+if(isset($_POST["name"]) || isset($_POST["rating"]) || isset($_POST["beschrijving"]) || isset($_POST["landVanAfkomst"]) || isset($_POST["taal"])  
+    || isset($_POST["prijzen"]) || isset($_POST["seizoenen"])
+) {
+    $updateSeries = $pdo->prepare("UPDATE series SET title=?, description=?, country=?, language=?, has_won_awards=?, rating=?, seasons=? WHERE id=?");
+    $updateSeries->execute([$_POST["name"], $_POST["beschrijving"], $_POST["landVanAfkomst"], $_POST["taal"], $_POST["prijzen"], $_POST["rating"], $_POST["seizoenen"], $_GET["id"]]); 
+    header("Refresh:0");
+}
 
 ?>
 </body>

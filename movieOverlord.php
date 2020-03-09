@@ -111,7 +111,7 @@ textarea {
     $stmt = $pdo->prepare("SELECT titel, duur, omschrijving, uitkomstDatum, landVanAfkomst, trailer, id FROM netland.movies WHERE id=?");
     $stmt->execute([$_GET['id']]);
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
-?>
+    ?>
     <a href="http://localhost/films.php<?php echo "?id=$info[id]" ?>">Vorige pagina</a>
     <div class="hHoofd">
         <form method="post" class="hoofd">
@@ -126,12 +126,13 @@ textarea {
     </div>
 <?php
     
-    if(isset($_POST["name"]) || isset($_POST["duur"]) || isset($_POST["beschrijving"]) || isset($_POST["landVanAfkomst"]) 
-    || isset($_POST["trailer"]) || isset($_POST["uitkomstDatum"])){
-        $updateMovies = $pdo->prepare("UPDATE movies SET titel=?, omschrijving=?, landVanAfkomst=?, duur=?, uitkomstDatum=?, trailer=? WHERE id=?");
-        $updateMovies->execute([$_POST["name"], $_POST["beschrijving"], $_POST["landVanAfkomst"], $_POST["duur"], $_POST["uitkomstDatum"], $_POST["trailer"], $_GET["id"]]); 
-        header("Refresh:0");
-    }
+if(isset($_POST["name"]) || isset($_POST["duur"]) || isset($_POST["beschrijving"]) || isset($_POST["landVanAfkomst"]) 
+    || isset($_POST["trailer"]) || isset($_POST["uitkomstDatum"])
+) {
+    $updateMovies = $pdo->prepare("UPDATE movies SET titel=?, omschrijving=?, landVanAfkomst=?, duur=?, uitkomstDatum=?, trailer=? WHERE id=?");
+    $updateMovies->execute([$_POST["name"], $_POST["beschrijving"], $_POST["landVanAfkomst"], $_POST["duur"], $_POST["uitkomstDatum"], $_POST["trailer"], $_GET["id"]]); 
+    header("Refresh:0");
+}
 ?>
 
 </body>
